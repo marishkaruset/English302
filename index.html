@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple English A2 — Much, many, few, a little</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#FFD600;
+    --yellow-dark:#F2C200;
+    --navy:#101D42;
+    --white:#FFFDF5;
+    --pink:#F5B8D0;
+    --green:#3BB143;
+    --red:#E5484D;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Montserrat',Arial,sans-serif;
+    background:var(--yellow);
+    color:var(--navy);
+    overflow-x:hidden;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px 28px;background:var(--white);
+    border-bottom:4px solid var(--navy);
+    position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:10px;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;}
+  .logo .dot{width:18px;height:18px;border-radius:50%;background:var(--navy);display:inline-block;}
+  .level-badge{
+    background:var(--pink);border:3px solid var(--navy);border-radius:14px;
+    padding:2px 12px;font-weight:900;font-size:15px;
+  }
+  .steps{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+  .step{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px;color:#8a8f9d;}
+  .step .circle{
+    width:30px;height:30px;border-radius:50%;border:3px solid #8a8f9d;
+    display:flex;align-items:center;justify-content:center;font-weight:900;
+    background:var(--white);color:#8a8f9d;transition:all .3s;
+  }
+  .step.done .circle{background:var(--green);border-color:var(--green);color:#fff;}
+  .step.done{color:var(--navy);}
+  .step.active .circle{border-color:var(--navy);color:var(--navy);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:78vh;display:flex;flex-direction:column;justify-content:center;
+    align-items:center;text-align:center;padding:60px 20px 90px;position:relative;
+    border-bottom:4px solid var(--navy);
+  }
+  .hero::after{
+    content:"";position:absolute;bottom:-2px;left:0;right:0;height:60px;
+    background:radial-gradient(circle at 50% 0, transparent 34px, var(--navy) 35px, var(--navy) 38px, transparent 39px);
+    background-size:110px 60px;background-position:center bottom;opacity:.9;
+  }
+  .pill-label{
+    background:var(--white);border:3px solid var(--navy);border-radius:999px;
+    padding:10px 26px;font-weight:800;letter-spacing:2px;font-size:13px;
+    box-shadow:5px 5px 0 var(--navy);margin-bottom:34px;text-transform:uppercase;
+  }
+  h1{font-size:clamp(34px,6vw,74px);font-weight:900;line-height:1.08;max-width:1000px;}
+  .hero p{max-width:720px;margin-top:26px;font-size:clamp(15px,2vw,19px);font-weight:500;line-height:1.65;}
+  .hero-btns{margin-top:44px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center;}
+  .btn{
+    border-radius:999px;padding:18px 38px;font-weight:900;font-size:17px;
+    cursor:pointer;border:3px solid var(--navy);transition:transform .15s, box-shadow .15s;
+    box-shadow:5px 5px 0 var(--navy);font-family:inherit;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--navy);}
+  .btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--navy);}
+  .btn-navy{background:var(--navy);color:var(--white);}
+  .btn-white{background:var(--white);color:var(--navy);}
+  .btn-green{background:var(--green);color:#fff;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+
+  /* ---------- TICKER ---------- */
+  .ticker{
+    background:var(--pink);border-bottom:4px solid var(--navy);
+    overflow:hidden;white-space:nowrap;padding:10px 0;font-weight:800;font-size:16px;
+  }
+  .ticker-inner{display:inline-block;animation:tick 30s linear infinite;}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ticker span{margin:0 22px;}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:70px 20px;max-width:940px;margin:0 auto;}
+  .sec-badge{
+    display:inline-block;background:var(--navy);color:var(--white);
+    border-radius:999px;padding:8px 22px;font-weight:800;font-size:13px;
+    letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;
+  }
+  h2{font-size:clamp(28px,4vw,44px);font-weight:900;margin-bottom:14px;}
+  .lead{font-size:17px;line-height:1.7;max-width:760px;margin-bottom:36px;}
+
+  .rule-card{
+    background:var(--white);border:3px solid var(--navy);border-radius:26px;
+    padding:30px 32px;margin-bottom:26px;box-shadow:6px 6px 0 var(--navy);
+  }
+  .rule-card h3{font-size:23px;font-weight:900;margin-bottom:14px;}
+  .rule-card h3 .tag{
+    display:inline-block;background:var(--pink);border:2px solid var(--navy);
+    border-radius:10px;padding:1px 10px;font-size:14px;margin-right:10px;vertical-align:middle;
+  }
+  .rule-card p{font-size:16px;line-height:1.75;margin-bottom:10px;}
+  .rule-card b{background:#DCE9FF;color:var(--navy);padding:0 6px;border-radius:6px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .chip{
+    border:2px solid var(--navy);border-radius:999px;padding:5px 14px;
+    font-weight:700;font-size:14px;background:#fff;
+  }
+  .chip.c{background:#DCE9FF;}
+  .chip.u{background:#FFE3EC;}
+  .mini{
+    background:var(--navy);color:var(--white);border-radius:18px;
+    padding:22px 26px;font-size:16px;line-height:1.8;margin-top:14px;
+  }
+  .mini b{color:var(--yellow);}
+
+  table.cheat{
+    width:100%;border-collapse:collapse;background:var(--white);
+    border:3px solid var(--navy);border-radius:20px;overflow:hidden;
+    box-shadow:6px 6px 0 var(--navy);font-size:15px;
+  }
+  .cheat th{background:var(--navy);color:var(--white);padding:14px;font-weight:800;text-align:left;}
+  .cheat td{padding:13px 14px;border-top:2px solid var(--navy);line-height:1.5;}
+  .cheat td:first-child{font-weight:900;white-space:nowrap;background:#FFE3EC;}
+
+  /* ---------- TEST ---------- */
+  .task{
+    background:var(--white);border:3px solid var(--navy);border-radius:22px;
+    padding:22px 26px;margin-bottom:18px;box-shadow:5px 5px 0 var(--navy);
+    transition:border-color .3s, background .3s;
+  }
+  .task .num{
+    display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--navy);
+    color:var(--white);align-items:center;justify-content:center;font-weight:900;margin-right:12px;
+  }
+  .task .q{font-size:17px;font-weight:700;line-height:1.6;}
+  .task .q .voc{color:#B03A8C;font-weight:800;}
+  .task .controls{margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+  select, input[type=text]{
+    font-family:inherit;font-size:16px;font-weight:700;color:var(--navy);
+    border:3px solid var(--navy);border-radius:14px;padding:10px 16px;background:#fff;outline:none;
+  }
+  input[type=text]{min-width:150px;}
+  select:focus, input[type=text]:focus{background:#EDF2FF;}
+  .check-btn{
+    background:var(--navy);color:var(--white);border:none;border-radius:999px;
+    padding:10px 24px;font-weight:900;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .mark{font-weight:900;font-size:15px;margin-left:6px;}
+  .task.ok{border-color:var(--green);background:#EDFBEE;}
+  .task.ok .mark{color:var(--green);}
+  .task.bad{border-color:var(--red);background:#FDEEEE;animation:shake .3s;}
+  .task.bad .mark{color:var(--red);}
+  @keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .task.done-task{border-color:var(--green);background:#EDFBEE;}
+  .task.done-task .mark{color:var(--green);}
+  .radio-row{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+  .radio-row label{
+    display:flex;align-items:center;gap:10px;border:2px solid var(--navy);border-radius:14px;
+    padding:10px 16px;font-weight:600;font-size:15px;cursor:pointer;background:#fff;
+  }
+  .radio-row input{accent-color:var(--navy);width:18px;height:18px;}
+  .part-title{
+    font-size:22px;font-weight:900;margin:44px 0 20px;display:flex;align-items:center;gap:14px;
+  }
+  .part-title::after{content:"";flex:1;height:3px;background:var(--navy);}
+  .stars-counter{
+    position:sticky;bottom:14px;margin:34px auto 0;width:fit-content;
+    background:var(--navy);color:var(--white);border-radius:999px;
+    padding:12px 30px;font-weight:900;font-size:16px;box-shadow:5px 5px 0 rgba(0,0,0,.25);z-index:10;
+  }
+  .stars-counter b{color:var(--yellow);font-size:20px;}
+
+  /* ---------- NAME + RESULT ---------- */
+  .name-box{
+    background:var(--navy);border-radius:30px;padding:50px 34px;text-align:center;
+    color:var(--white);box-shadow:7px 7px 0 rgba(0,0,0,.25);
+  }
+  .name-box h2{color:var(--white);}
+  .name-box p{margin:14px 0 26px;line-height:1.7;font-size:16px;}
+  .name-box input{
+    font-size:19px;padding:14px 24px;border-radius:999px;border:3px solid var(--yellow);
+    text-align:center;font-weight:800;min-width:min(320px,80%);
+  }
+  .result{
+    display:none;background:var(--white);border:4px solid var(--navy);border-radius:30px;
+    padding:56px 34px;text-align:center;box-shadow:8px 8px 0 var(--navy);margin-top:30px;
+  }
+  .result h2{font-size:clamp(28px,4.5vw,46px);}
+  .result .score{font-size:clamp(52px,9vw,96px);font-weight:900;margin:18px 0 6px;color:var(--navy);}
+  .result .score small{font-size:.4em;}
+  .result .msg{font-size:20px;font-weight:800;margin-bottom:8px;}
+  .result .bigstars{font-size:30px;letter-spacing:6px;margin:12px 0 24px;color:var(--yellow-dark);}
+
+  footer{background:var(--navy);color:var(--white);text-align:center;padding:26px 16px;font-weight:700;font-size:14px;}
+  .hidden{display:none !important;}
+  @media(max-width:640px){
+    header{padding:12px 14px;}
+    .task{padding:18px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="dot"></span> Simple English <span class="level-badge">A2</span></div>
+  <div class="steps">
+    <div class="step" id="stepA"><span class="circle">1</span> much / many</div>
+    <div class="step" id="stepB"><span class="circle">2</span> few / a few</div>
+    <div class="step" id="stepC"><span class="circle">3</span> little / a little</div>
+    <div class="step" id="stepD"><span class="circle">★</span> Тест</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="pill-label">Тренажёр грамматики · Уровень A2</div>
+  <h1>Much, many, few, a&nbsp;few, little, a&nbsp;little — без зубрёжки</h1>
+  <p>Короткие правила-шпаргалки и живые упражнения с мгновенной проверкой.
+     Вся лексика — из профессии: закупка и хранение продуктов и обслуживание посетителей.
+     Отвечай, получай звёзды — и доведи все четыре кружка вверху до зелёного.</p>
+  <div class="hero-btns">
+    <button class="btn btn-navy" onclick="document.getElementById('rules').scrollIntoView({behavior:'smooth'})">Начать с правил →</button>
+    <button class="btn btn-white" onclick="document.getElementById('test').scrollIntoView({behavior:'smooth'})">Сразу к тесту</button>
+  </div>
+</div>
+
+<div class="ticker"><div class="ticker-inner" id="ticker"></div></div>
+
+<!-- ============ RULES ============ -->
+<section id="rules">
+  <span class="sec-badge">Правила-шпаргалки</span>
+  <h2>Четыре простых шага</h2>
+  <p class="lead">Никакой зубрёжки. Прочти 10 минут — и местоимения запомнятся сами, потому что всё объясняется на примерах из кафе, склада и зала.</p>
+
+  <div class="rule-card">
+    <h3><span class="tag">Шаг 1</span>Делим слова на две корзины</h3>
+    <p>В английском все слова делятся на <b>те, что можно посчитать</b> (one, two, three…), и <b>те, что нельзя</b> (не посчитаешь «один воды»).</p>
+    <div class="chips">
+      <span class="chip c">✅ Можно посчитать: guests · eggs · bottles · tables · orders · cakes · suppliers · boxes</span>
+      <span class="chip u">☕ Нельзя посчитать: milk · water · coffee · bread · cheese · rice · sugar · time · money</span>
+    </div>
+    <div class="mini">💡 <b>Хитрость:</b> если к слову можно поставить число («three eggs» ✔, «three milk» ✖) — оно счётное.</div>
+  </div>
+
+  <div class="rule-card">
+    <h3><span class="tag">Шаг 2</span>Much и many — «много» и вопросы</h3>
+    <p><b>many</b> — «много» для слов, которые можно посчитать: <i>Many guests come on Friday.</i> — В пятницу приходит много гостей.</p>
+    <p><b>much</b> — «много» для слов, которые нельзя посчитать: <i>We don't have much time.</i> — У нас не так много времени.</p>
+    <p>В вопросах всегда спрашиваем: <b>How many + считаемые?</b> (<i>How many bottles?</i>) и <b>How much + несчитаемые?</b> (<i>How much sugar?</i>)</p>
+    <div class="mini">💡 <b>Подсказка:</b> many — м<b>Н</b>ого — с<b>Н</b>ачинается на ту же букву, что и «number» (число). Числа → many.</div>
+  </div>
+
+  <div class="rule-card">
+    <h3><span class="tag">Шаг 3</span>Few / a few — для тех, что считаются</h3>
+    <p><b>a few</b> = <b>несколько</b>. Есть, пусть и не много: <i>We have a few tables free.</i> — У нас свободно несколько столиков. 🍀 Хорошая новость.</p>
+    <p><b>few</b> = <b>почти нет, жалко мало</b>: <i>Few guests left a tip.</i> — Почти никто из гостей не оставил чаевых. 🌧 Грустная новость.</p>
+    <div class="mini">💡 <b>Запомни:</b> буква <b>a</b> — это «добавка». <b>A few</b> = добавка к нулю → «несколько есть». А просто <b>few</b> — почти пусто.</div>
+  </div>
+
+  <div class="rule-card">
+    <h3><span class="tag">Шаг 4</span>Little / a little — для «жидких» слов</h3>
+    <p><b>a little</b> = <b>немного</b>. Есть, пусть и капля: <i>There's a little milk left.</i> — Осталось немного молока. 🍀</p>
+    <p><b>little</b> = <b>почти ничего не осталось</b>: <i>We have little cheese — order more!</i> — Сыра почти не осталось — закажи ещё! 🌧</p>
+    <div class="mini">💡 <b>Та же логика:</b> <b>a little</b> = «есть чуть-чуть», <b>little</b> = «почти ноль». Буква <b>a</b> всегда добавляет оптимизма.</div>
+  </div>
+
+  <table class="cheat">
+    <tr><th>Слово</th><th>С чем употреблять</th><th>Значение</th><th>Пример из профессии</th></tr>
+    <tr><td>many</td><td>считаемые ✚</td><td>много</td><td>Many customers order soup at lunch.</td></tr>
+    <tr><td>much</td><td>несчитаемые ☕</td><td>много</td><td>We don't need much rice today.</td></tr>
+    <tr><td>a few</td><td>считаемые ✚</td><td>несколько 🍀</td><td>A few guests asked for the bill.</td></tr>
+    <tr><td>few</td><td>считаемые ✚</td><td>почти нет 🌧</td><td>Few suppliers work on Sunday.</td></tr>
+    <tr><td>a little</td><td>несчитаемые ☕</td><td>немного 🍀</td><td>Add a little salt to the soup.</td></tr>
+    <tr><td>little</td><td>несчитаемые ☕</td><td>почти ничего 🌧</td><td>There is little water in the jug.</td></tr>
+  </table>
+</section>
+
+<div class="ticker"><div class="ticker-inner" id="ticker2"></div></div>
+
+<!-- ============ TEST ============ -->
+<section id="test">
+  <span class="sec-badge">Тренировка</span>
+  <h2>25 заданий — и всё встанет на место</h2>
+  <p class="lead">Часть 1 — выбери слово из списка. Часть 2 — выбери правильное предложение. Часть 3 — впиши слово сам. Проверка мгновенная: верно — зелёная рамка и звезда ⭐</p>
+
+  <div id="partA"></div>
+  <div id="partB"></div>
+  <div id="partC"></div>
+
+  <div class="stars-counter">⭐ Твои звёзды: <b id="starCount">0</b> / 25</div>
+
+  <!-- NAME FORM -->
+  <div class="name-box" id="nameBox" style="margin-top:60px;">
+    <h2>Как тебя зовут?</h2>
+    <p>Напиши имя — и мы покажем твой результат. Ошибки по заданиям мы не показываем: просто посмотри, сколько звёзд ты собрал, и повтори правила ещё раз.</p>
+    <input type="text" id="studentName" placeholder="Твоё имя" maxlength="30">
+    <div style="margin-top:22px;">
+      <button class="btn btn-green" id="showResultBtn" onclick="showResult()">Показать мой результат →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="resultBox">
+    <div style="font-size:52px;" id="resultEmoji">🎉</div>
+    <h2 id="resultTitle">Твой результат</h2>
+    <div class="score" id="resultScore">0<small>/25</small></div>
+    <div class="bigstars" id="resultStars">★★★★★</div>
+    <div class="msg" id="resultMsg"></div>
+    <p style="font-size:15px;line-height:1.7;max-width:520px;margin:0 auto 26px;" id="resultAdvice"></p>
+    <button class="btn btn-navy" onclick="location.reload()">Пройти ещё раз</button>
+  </div>
+</section>
+
+<footer>Simple English A2 · Тренажёр «Much, many, few, a few, little, a little» · Закупка, хранение продуктов и обслуживание посетителей</footer>
+
+<script>
+/* ---------- DATA ---------- */
+const words = ["much","many","few","a few","little","a little"];
+
+const partA = [
+  {q:'We order ___ fresh vegetables from the farm every week.', a:'many'},
+  {q:'How ___ milk does the café need every day?', a:'much'},
+  {q:'There are only ___ eggs left in the fridge.', a:'a few'},
+  {q:'___ guests complained about the cold soup — only two or three.', a:'A few'},
+  {q:'We have ___ time before the delivery arrives.', a:'a little'},
+  {q:'There isn\'t ___ sugar in the storage room.', a:'much'},
+  {q:'The manager calls suppliers ___ times a week.', a:'many'},
+  {q:'There are ___ empty tables, so you can sit down right away.', a:'a few'},
+  {q:'___ butter is left — we must buy more today.', a:'Little'},
+  {q:'How ___ bottles of water do we need for the banquet?', a:'many'}
+];
+
+const partB = [
+  {opts:['We don\'t have much bread left.','We don\'t have many bread left.'], a:0},
+  {opts:['There is a few milk in the fridge.','There is a little milk in the fridge.'], a:1},
+  {opts:['Few customers left a tip yesterday.','Little customers left a tip yesterday.'], a:0},
+  {opts:['Do you have a little free time today?','Do you have a few free time today?'], a:0},
+  {opts:['How much guests are in the hall?','How many guests are in the hall?'], a:1}
+];
+
+const partC = [
+  {q:'Sorry, we have very ___ seats left for tonight. (почти не осталось)', a:['few']},
+  {q:'Add ___ salt to the soup — just a pinch. (немного)', a:['a little']},
+  {q:'The supplier brings ___ boxes of fruit twice a week. (много)', a:['many']},
+  {q:'We need ___ flour to bake bread for the whole week. (много)', a:['much']},
+  {q:'Wait five minutes — we need ___ time to prepare your table. (немного)', a:['a little']},
+  {q:'___ water is in the jug — almost none. (почти ничего)', a:['little']},
+  {q:'How ___ cartons of juice are in the warehouse? (вопрос)', a:['many']},
+  {q:'There aren\'t ___ cakes left in the display. (много → отрицание)', a:['many']},
+  {q:'___ customers ask for the menu in English. (несколько)', a:['a few','a  few']},
+  {q:'The banquet starts soon, but we still have ___ work to do. (много)', a:['much']}
+];
+
+const state = new Array(26).fill(null); // index 1..25 -> true/false
+
+/* ---------- RENDER PART A (1-10) ---------- */
+function renderPartA(){
+  const el = document.getElementById('partA');
+  let html = '<div class="part-title">Часть 1 · Выбери слово из списка (1–10)</div>';
+  partA.forEach((t,i)=>{
+    const n = i+1;
+    const opts = words.map(w=>`<option value="${w}">${w}</option>`).join('');
+    html += `<div class="task" id="task${n}">
+      <div class="q"><span class="num">${n}</span>${t.q}</div>
+      <div class="controls">
+        <select id="sel${n}"><option value="">— выбери —</option>${opts}</select>
+        <span class="mark" id="mark${n}"></span>
+      </div></div>`;
+  });
+  el.innerHTML = html;
+  partA.forEach((t,i)=>{
+    const n=i+1;
+    document.getElementById('sel'+n).addEventListener('change', e=>{
+      const val = e.target.value.trim().toLowerCase();
+      const ok = val === t.a.toLowerCase();
+      setState(n, ok, val!=='');
+      if(val!=='') e.target.disabled = true;
+    });
+  });
+}
+
+/* ---------- RENDER PART B (11-15) ---------- */
+function renderPartB(){
+  const el = document.getElementById('partB');
+  let html = '<div class="part-title">Часть 2 · Выбери правильное предложение (11–15)</div>';
+  partB.forEach((t,i)=>{
+    const n = i+11;
+    const opts = t.opts.map((o,j)=>`<label><input type="radio" name="q${n}" value="${j}"> ${o}</label>`).join('');
+    html += `<div class="task" id="task${n}">
+      <div class="q"><span class="num">${n}</span>Какое предложение правильное?</div>
+      <div class="radio-row">${opts}</div>
+      <div class="controls"><span class="mark" id="mark${n}"></span></div></div>`;
+  });
+  el.innerHTML = html;
+  partB.forEach((t,i)=>{
+    const n=i+11;
+    document.querySelectorAll(`input[name="q${n}"]`).forEach(r=>{
+      r.addEventListener('change', e=>{
+        const ok = parseInt(e.target.value)===t.a;
+        setState(n, ok, true);
+        document.querySelectorAll(`input[name="q${n}"]`).forEach(x=>x.disabled=true);
+      });
+    });
+  });
+}
+
+/* ---------- RENDER PART C (16-25) ---------- */
+function renderPartC(){
+  const el = document.getElementById('partC');
+  let html = '<div class="part-title">Часть 3 · Впиши слово сам (16–25)</div>';
+  partC.forEach((t,i)=>{
+    const n = i+16;
+    html += `<div class="task" id="task${n}">
+      <div class="q"><span class="num">${n}</span>${t.q}</div>
+      <div class="controls">
+        <input type="text" id="inp${n}" placeholder="much / many / few / a few / little / a little" autocomplete="off">
+        <button class="check-btn" id="btn${n}">Проверить</button>
+        <span class="mark" id="mark${n}"></span>
+      </div></div>`;
+  });
+  el.innerHTML = html;
+  partC.forEach((t,i)=>{
+    const n=i+16;
+    const check = ()=>{
+      const inp = document.getElementById('inp'+n);
+      if(inp.disabled) return;
+      const val = inp.value.trim().toLowerCase().replace(/\s+/g,' ');
+      if(!val) return;
+      const ok = t.a.includes(val);
+      setState(n, ok, true);
+      if(ok){ inp.disabled = true; document.getElementById('btn'+n).disabled = true; }
+    };
+    document.getElementById('btn'+n).addEventListener('click', check);
+    document.getElementById('inp'+n).addEventListener('keydown', e=>{ if(e.key==='Enter') check(); });
+  });
+}
+
+/* ---------- STATE / CHECK ---------- */
+function setState(n, ok, answered){
+  state[n] = answered ? ok : null;
+  const task = document.getElementById('task'+n);
+  const mark = document.getElementById('mark'+n);
+  task.classList.remove('ok','bad');
+  if(answered){
+    task.classList.add(ok ? 'ok' : 'bad');
+    mark.textContent = ok ? '✔ Верно! +1⭐' : '✖ Пока неверно — попробуй ещё';
+  }
+  updateStars();
+  updateSteps();
+}
+
+function countCorrect(){ return state.slice(1).filter(x=>x===true).length; }
+
+function updateStars(){
+  document.getElementById('starCount').textContent = countCorrect();
+}
+
+function allCorrect(from,to){
+  for(let i=from;i<=to;i++) if(state[i]!==true) return false;
+  return true;
+}
+function answeredCount(from,to){
+  let c=0; for(let i=from;i<=to;i++) if(state[i]!==null) c++; return c;
+}
+
+function updateSteps(){
+  document.getElementById('stepA').classList.toggle('done', allCorrect(1,10));
+  document.getElementById('stepA').classList.toggle('active', !allCorrect(1,10) && answeredCount(1,10)>0);
+  document.getElementById('stepB').classList.toggle('done', allCorrect(11,15));
+  document.getElementById('stepB').classList.toggle('active', allCorrect(1,10) && !allCorrect(11,15));
+  document.getElementById('stepC').classList.toggle('done', allCorrect(16,25));
+  document.getElementById('stepC').classList.toggle('active', allCorrect(1,15) && !allCorrect(16,25));
+  document.getElementById('stepD').classList.toggle('done', countCorrect()===25);
+}
+
+/* ---------- RESULT ---------- */
+function showResult(){
+  const name = document.getElementById('studentName').value.trim();
+  if(!name){ document.getElementById('studentName').focus(); document.getElementById('studentName').style.borderColor='#E5484D'; return; }
+  const score = countCorrect();
+  const pct = Math.round(score/25*100);
+  document.getElementById('resultTitle').textContent = `${name}, твой результат:`;
+  document.getElementById('resultScore').innerHTML = `${score}<small>/25 · ${pct}%</small>`;
+  const stars = Math.round(pct/20);
+  document.getElementById('resultStars').textContent = '★★★★★'.slice(0,stars) + '☆☆☆☆☆'.slice(0,5-stars);
+  let emoji,msg,advice;
+  if(score>=23){ emoji='🏆'; msg='Отлично! Ты почти не ошибаешься.'; advice='Грамматика освоена. Можешь смело переходить к уровню B1 или проходить тренажёр ещё быстрее!'; }
+  else if(score>=18){ emoji='🎉'; msg='Хорошая работа!'; advice='Основы уже твои. Загляни ещё раз в правила-шпаргалки выше — и следующая попытка будет идеальной.'; }
+  else if(score>=13){ emoji='💪'; msg='Неплохо, но есть куда расти.'; advice='Перечитай четыре шага правил — особенно разницу между «почти нет» (few/little) и «несколько» (a few/a little) — и попробуй снова.'; }
+  else { emoji='📚'; msg='Не сдавайся!'; advice='Начни с шага 1: учи слова как «считаемые» и «несчитаемые». Пройди правила ещё раз — и звёзды прибавятся.'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultMsg').textContent = msg;
+  document.getElementById('resultAdvice').textContent = advice;
+  document.getElementById('resultBox').style.display = 'block';
+  document.getElementById('nameBox').style.display = 'none';
+  document.getElementById('resultBox').scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('studentName').addEventListener('keydown', e=>{ if(e.key==='Enter') showResult(); });
+
+/* ---------- TICKERS ---------- */
+const phrases = ['how much? ★ how many? ★ a few guests ★ little time ★ many orders ★ a little salt ★ few complaints ★ much coffee ★ how many tables? ★ a few bottles ★ little milk ★ many suppliers ★ a little sugar ★ '];
+const tick = phrases[0].repeat(4);
+document.getElementById('ticker').textContent = tick;
+document.getElementById('ticker2').textContent = tick;
+
+renderPartA(); renderPartB(); renderPartC();
+</script>
+</body>
+</html>
